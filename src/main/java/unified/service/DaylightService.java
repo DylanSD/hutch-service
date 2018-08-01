@@ -13,9 +13,10 @@ import java.util.Calendar;
  */
 public class DaylightService {
 
+    private ZoneId zoneId = ZoneId.of("America/Los_Angeles");
     private Logger logger = LoggerFactory.getLogger(getClass());
     private Location location = new Location("37.887509", "-122.54607");
-    private SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(location, "America/New_York");
+    private SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(location, "America/Los_Angeles");
 
     public DaylightService() {
     }
@@ -26,8 +27,8 @@ public class DaylightService {
         Calendar officialSunrise = calculator.getOfficialSunriseCalendarForDate(Calendar.getInstance());
         Calendar officialSunset = calculator.getOfficialSunsetCalendarForDate(Calendar.getInstance());
 
-        LocalTime sunrise = LocalDateTime.ofInstant(officialSunrise.toInstant(), ZoneId.systemDefault()).toLocalTime();
-        LocalTime sunset = LocalDateTime.ofInstant(officialSunset.toInstant(), ZoneId.systemDefault()).toLocalTime();
+        LocalTime sunrise = LocalDateTime.ofInstant(officialSunrise.toInstant(), zoneId).toLocalTime();
+        LocalTime sunset = LocalDateTime.ofInstant(officialSunset.toInstant(), zoneId).toLocalTime();
 
         logger.info("Sunrise: " + sunrise);
         logger.info("Sunset: " + sunset);
