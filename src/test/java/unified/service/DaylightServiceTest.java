@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -22,33 +23,12 @@ public class DaylightServiceTest {
     }
 
     @Test
-    public void getLightEventsForDay() throws Exception {
-        System.out.println(daylightService.getLightEventsForDay(LocalDate.parse("2018-03-10", formatterDate)));
-        System.out.println(daylightService.getLightEventsForDay(LocalDate.parse("2018-03-11", formatterDate)));
-        System.out.println(daylightService.getLightEventsForDay(LocalDate.parse("2018-11-03", formatterDate)));
-        System.out.println(daylightService.getLightEventsForDay(LocalDate.parse("2018-11-04", formatterDate)));
-    }
-
-    @Test
     public void shouldLightBeOnNow() throws Exception {
-        System.out.println(daylightService.shouldLightBeOnNow());
-    }
-
-    @Test
-    public void getDawn() throws Exception {
-        System.out.println(daylightService.getDawnTime(LocalDate.parse("2018-01-01", formatterDate)));
-        System.out.println(daylightService.getDawnTime(LocalDate.parse("2018-02-01", formatterDate)));
-        System.out.println(daylightService.getDawnTime(LocalDate.parse("2018-03-01", formatterDate)));
-        System.out.println(daylightService.getDawnTime(LocalDate.parse("2018-04-01", formatterDate)));
-        System.out.println(daylightService.getDawnTime(LocalDate.parse("2018-05-01", formatterDate)));
-        System.out.println(daylightService.getDawnTime(LocalDate.parse("2018-06-01", formatterDate)));
-        System.out.println(daylightService.getDawnTime(LocalDate.parse("2018-07-01", formatterDate)));
-        System.out.println(daylightService.getDawnTime(LocalDate.parse("2018-08-01", formatterDate)));
-        System.out.println(daylightService.getDawnTime(LocalDate.parse("2018-09-01", formatterDate)));
-        System.out.println(daylightService.getDawnTime(LocalDate.parse("2018-10-01", formatterDate)));
-        System.out.println(daylightService.getDawnTime(LocalDate.parse("2018-11-01", formatterDate)));
-        System.out.println(daylightService.getDawnTime(LocalDate.parse("2018-12-01", formatterDate)));
-
+        LocalTime now = LocalTime.now();
+        LocalTime.of(0,0);
+        for (int i = 0 ; i < 24; i++) {
+            System.out.println(i + ": " + daylightService.shouldLightBeOnNow(LocalTime.of(i,0)));
+        }
     }
 
     @Test
