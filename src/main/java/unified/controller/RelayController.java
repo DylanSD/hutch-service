@@ -14,6 +14,7 @@ import unified.service.DaylightService;
 import unified.service.RelayService;
 
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
@@ -23,6 +24,8 @@ public class RelayController {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     private DaylightService daylightService = new DaylightService();
+
+    private ZoneId zoneId = ZoneId.of("America/Los_Angeles");
 
     @Autowired
     private RelayService relayService;
@@ -67,7 +70,7 @@ public class RelayController {
     @GetMapping(value = "/shouldLightBeOn")
     public ResponseEntity<Boolean> shouldLightBeOn() throws InterruptedException {
         logger.info("Request for checking if the light should be on?");
-        return Optional.ofNullable(daylightService.shouldLightBeOnNow(ZonedDateTime.now()))
+        return Optional.ofNullable(daylightService.shouldLightBeOnNow(ZonedDateTime.now(zoneId)))
                 .map(relay -> ResponseEntity.ok().body(relay))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
