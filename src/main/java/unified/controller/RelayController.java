@@ -13,7 +13,6 @@ import unified.model.State;
 import unified.service.DaylightService;
 import unified.service.RelayService;
 
-import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Optional;
