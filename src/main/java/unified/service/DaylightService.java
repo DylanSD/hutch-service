@@ -21,14 +21,14 @@ public class DaylightService {
     public DaylightService() {
     }
 
-    public boolean shouldLightBeOnNow(LocalTime now) {
+    public boolean shouldLightBeOnNow(ZonedDateTime now) {
         //37.887509, -122.546074
 
         Calendar officialSunrise = calculator.getOfficialSunriseCalendarForDate(Calendar.getInstance());
         Calendar officialSunset = calculator.getOfficialSunsetCalendarForDate(Calendar.getInstance());
 
-        LocalTime sunrise = LocalDateTime.ofInstant(officialSunrise.toInstant(), zoneId).toLocalTime();
-        LocalTime sunset = LocalDateTime.ofInstant(officialSunset.toInstant(), zoneId).toLocalTime();
+        ZonedDateTime sunrise = ZonedDateTime.ofInstant(officialSunrise.toInstant(), zoneId);
+        ZonedDateTime sunset = ZonedDateTime.ofInstant(officialSunset.toInstant(), zoneId);
 
         logger.info("Sunrise: " + sunrise);
         logger.info("Sunset: " + sunset);

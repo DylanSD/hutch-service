@@ -14,6 +14,7 @@ import unified.service.DaylightService;
 import unified.service.RelayService;
 
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @RestController(value = "/relays")
@@ -66,7 +67,7 @@ public class RelayController {
     @GetMapping(value = "/shouldLightBeOn")
     public ResponseEntity<Boolean> shouldLightBeOn() throws InterruptedException {
         logger.info("Request for checking if the light should be on?");
-        return Optional.ofNullable(daylightService.shouldLightBeOnNow(LocalTime.now()))
+        return Optional.ofNullable(daylightService.shouldLightBeOnNow(ZonedDateTime.now()))
                 .map(relay -> ResponseEntity.ok().body(relay))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
