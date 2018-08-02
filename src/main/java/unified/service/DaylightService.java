@@ -33,7 +33,7 @@ public class DaylightService {
         logger.info("Sunrise: " + sunrise);
         logger.info("Sunset: " + sunset);
 
-        if (now.getHour() >= 22) {
+        if (now.getHour() >= 21) {
             logger.info("Hour is greater or equal to 22, light should be off");
             return false;
         }
@@ -41,7 +41,7 @@ public class DaylightService {
             logger.info("Hour is less or equal to 4, light should be off");
             return false;
         }
-        if (now.isAfter(sunrise.plusMinutes(30)) && now.isBefore(sunset.minusMinutes(30))) {
+        if (now.isAfter(sunrise.plusMinutes(15)) && now.isBefore(sunset.minusMinutes(30))) {
             logger.info("Hour is in the middle of the day, light should be off");
             return false;
         }
