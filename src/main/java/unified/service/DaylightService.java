@@ -34,12 +34,8 @@ public class DaylightService {
         logger.info("Sunrise: " + sunrise);
         logger.info("Sunset: " + sunset);
 
-        if (now.isAfter(sunrise.plusMinutes(15)) && now.isBefore(sunset)) {
+        if (now.isAfter(sunrise) && now.isBefore(sunset)) {
             logger.info("Hour is in the day, light should be off");
-            return false;
-        }
-        if (now.isAfter(sunset.plusMinutes(15))) {
-            logger.info("After sunset closing down");
             return false;
         }
         if (now.getHour() < 5) {
