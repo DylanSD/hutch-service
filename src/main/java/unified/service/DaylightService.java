@@ -16,6 +16,7 @@ public class DaylightService {
     private ZoneId zoneId = ZoneId.of("America/Los_Angeles");
     private Logger logger = LoggerFactory.getLogger(getClass());
     private Location location = new Location("37.887509", "-122.54607");
+
     private SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(location, "America/Los_Angeles");
 
     public DaylightService() {
@@ -33,20 +34,28 @@ public class DaylightService {
         logger.info("Sunrise: " + sunrise);
         logger.info("Sunset: " + sunset);
 
-        if (now.getHour() >= 21) {
-            logger.info("Hour is greater or equal to 22, light should be off");
+        if (now.isAfter(sunrise.plusMinutes(15)) && now.isBefore(sunset)) {
+            logger.info("Hour is in the day, light should be off");
             return false;
         }
-        if (now.getHour() <= 4) {
-            logger.info("Hour is less or equal to 4, light should be off");
+        if (now.isAfter(sunset.plusMinutes(15))) {
+            logger.info("After sunset closing down");
             return false;
         }
-        if (now.isAfter(sunrise.plusMinutes(15)) && now.isBefore(sunset.minusMinutes(30))) {
-            logger.info("Hour is in the middle of the day, light should be off");
+        if (now.getHour() < 5) {
+            logger.info("Before sunrise by too much");
+            return false;
+        }
+        if (now.getHour() > 19) {
+            logger.info("After sunset by too much");
             return false;
         }
         logger.info("Reporting that light is on for time: " + now);
         return true;
+    }
+
+    public void setCalculator(SunriseSunsetCalculator calculator) {
+        this.calculator = calculator;
     }
 
 }
