@@ -31,8 +31,7 @@ public class DaylightService {
         ZonedDateTime sunrise = ZonedDateTime.ofInstant(officialSunrise.toInstant(), zoneId);
         ZonedDateTime sunset = ZonedDateTime.ofInstant(officialSunset.toInstant(), zoneId);
 
-        logger.info("Sunrise: " + sunrise);
-        logger.info("Sunset: " + sunset);
+        logger.info("Checking time " + now + " against sunrise: " + sunrise + " and sunset: " + sunset);
 
         if (now.isAfter(sunrise) && now.isBefore(sunset)) {
             logger.info("Hour is in the day, light should be off");
