@@ -15,7 +15,7 @@ public class DaylightService {
 
     private ZoneId zoneId = ZoneId.of("America/Los_Angeles");
     private Logger logger = LoggerFactory.getLogger(getClass());
-    private Location location = new Location("37.887509", "-122.54607");
+    private Location location = new Location("37.887489", "-122.546291");
 
     private SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(location, "America/Los_Angeles");
 
@@ -23,8 +23,7 @@ public class DaylightService {
     }
 
     public boolean shouldLightBeOnNow(ZonedDateTime now) {
-        //37.887509, -122.546074
-
+        
         Calendar officialSunrise = calculator.getOfficialSunriseCalendarForDate(Calendar.getInstance());
         Calendar officialSunset = calculator.getOfficialSunsetCalendarForDate(Calendar.getInstance());
 
